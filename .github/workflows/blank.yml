@@ -50,7 +50,7 @@ jobs:
     - name: enable Venv
       run: |
         python3.11 -m venv venv
-        source venv/bin activate
+        source venv/bin/activate
         pip install pybatfish
 
     - name: Run tests (pytest)
