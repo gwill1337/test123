@@ -37,4 +37,4 @@ jobs:
       run: ansible-playbook ansible/playbook.yml -i ansible/hosts
 
     - name: Run Python script
-      run: python scripts/run_batfish.py
+      run: python tests/test_batfish.py
