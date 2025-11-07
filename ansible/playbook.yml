@@ -11,6 +11,6 @@
 
     - name: Copy all device configs (recursive)
       ansible.builtin.copy:
-        src: "configs/"
+        src: "..configs/"
         dest: "snapshots/ci_net/s1/configs/"
         recurse: yes
