@@ -1,18 +1,28 @@
-# ansible/playbook.yml
-- hosts: localhost
-  gather_facts: false
+- name: Ensure Batfish snapshot folder exists
+  hosts: localhost
   tasks:
-    - name: Ensure snapshot dir exists
+    - name: Create snapshot folder
       file:
-        path: snapshots/ci_net/s1
+        path: ./snapshots/ci_net/s1
         state: directory
+        mode: '0755'
 
-    - name: Copy real device configs into snapshot
-      copy:
-        src: ../configs/  # путь к твоей папке с конфигами
-        dest: snapshots/ci_net/s1/configs
-        mode: '0644'
-        remote_src: no
+
+# # ansible/playbook.yml
+# - hosts: localhost
+#   gather_facts: false
+#   tasks:
+#     - name: Ensure snapshot dir exists
+#       file:
+#         path: snapshots/ci_net/s1
+#         state: directory
+
+#     - name: Copy real device configs into snapshot
+#       copy:
+#         src: ../configs/  # путь к твоей папке с конфигами
+#         dest: snapshots/ci_net/s1/configs
+#         mode: '0644'
+#         remote_src: no
         
 # - name: Copy configs into Batfish snapshot folder
 #   hosts: localhost
