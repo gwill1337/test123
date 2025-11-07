@@ -10,14 +10,10 @@ jobs:
 
     - name: Start Batfish (Docker)
       run: |
-        docker pull batfish/allinone
-        docker run -d --name batfish \
-          -v "${{ github.workspace }}/snapshots:/data/snapshots" \
-          -p 8888:8888 -p 9996:9996 \
-          batfish/allinone
+        sudo docker run -d --name batfish -p 8888:8888 -p 9996:9996 batfish/allinone
         # wait until Batfish API responds
         for i in {1..60}; do
-          if curl -sSf http://localhost:9996/v1/help >/dev/null 2>&1; then
+          if curl -sSf http://localhost:9996/v2/version >/dev/null 2>&1; then
             echo "Batfish ready"; break
           fi
           sleep 1
