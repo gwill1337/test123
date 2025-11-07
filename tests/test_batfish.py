@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 from pybatfish.client.session import Session
 import os
-import pandas as pd
 
 # Настройки
 bf_address = "127.0.0.1"
@@ -14,32 +13,37 @@ bf = Session(host=bf_address)
 bf.set_network(network_name)
 bf.init_snapshot(snapshot_path, name="s1", overwrite=True)
 
-# Создаём директорию для результатов
 os.makedirs(output_dir, exist_ok=True)
 
-# 1. Node Properties (узлы + базовые свойства)
+# 1. Node Properties
 nodes_df = bf.q.nodeProperties().answer().frame()
 nodes_df.to_csv(f"{output_dir}/nodes.csv")
 print("=== Nodes ===")
 print(nodes_df)
 
-# 2. Интерфейсы каждого узла
+# 2. Интерфейсы
 interfaces_df = bf.q.interfaceProperties().answer().frame()
 interfaces_df.to_csv(f"{output_dir}/interfaces.csv")
 print("\n=== Interfaces ===")
 print(interfaces_df)
 
-# 3. BGP-соседи
-bgp_neighbors_df = bf.q.bgpNeighbors().answer().frame()
-bgp_neighbors_df.to_csv(f"{output_dir}/bgp_neighbors.csv")
-print("\n=== BGP Neighbors ===")
-print(bgp_neighbors_df)
+# 3. BGP-сессии (замена устаревшего bgpNeighbors)
+try:
+    bgp_sessions_df = bf.q.bgpSession().answer().frame()
+    bgp_sessions_df.to_csv(f"{output_dir}/bgp_sessions.csv")
+    print("\n=== BGP Sessions ===")
+    print(bgp_sessions_df)
+except Exception as e:
+    print("BGP Sessions not available:", e)
 
-# 4. ACLs (если есть)
-acls_df = bf.q.accessLists().answer().frame()
-acls_df.to_csv(f"{output_dir}/acls.csv")
-print("\n=== ACLs ===")
-print(acls_df)
+# 4. ACLs
+try:
+    acls_df = bf.q.accessLists().answer().frame()
+    acls_df.to_csv(f"{output_dir}/acls.csv")
+    print("\n=== ACLs ===")
+    print(acls_df)
+except Exception as e:
+    print("ACLs not available:", e)
 
 
 # #!/usr/bin/env python3
