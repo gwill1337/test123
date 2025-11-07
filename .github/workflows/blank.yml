@@ -31,10 +31,10 @@ jobs:
 
     - name: Prepare Batfish snapshot
       run: |
-        sudo mkdir -p snapshots/ci_net/s1
+        sudo mkdir -p snapshots/ci_net/s1/configs
         for i in {1..5}; do
           sudo touch snapshots/ci_net/s1/router$i.cfg
-          echo "! Router $i config" | sudo tee -a snapshots/ci_net/s1/router$i.cfg >/dev/null
+          echo "! Router $i config" | sudo tee snapshots/ci_net/s1/configs/router$i.cfg >/dev/null
         done
 
     - name: Copy configs to snapshot (Ansible)
