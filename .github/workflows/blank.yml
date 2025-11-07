@@ -48,4 +48,4 @@ jobs:
       run:  ansible-playbook ansible/playbook.yml -i ansible/hosts
 
     - name: Run tests (pytest)
-      run: sudo pytest -q
+      run:  pytest -q
