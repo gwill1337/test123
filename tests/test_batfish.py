@@ -1,24 +1,26 @@
 #!/usr/bin/env python3
-from pybatfish.client.commands import bf_init_snapshot, bf_session
-from pybatfish.question import bfq
+from pybatfish.client.session import Session
 import os
 
 # Настройки
 bf_address = "127.0.0.1"
 snapshot_path = "./snapshots/ci_net/s1"
 output_dir = "./output"
+network_name = "ci_net"
 
 # Подключение к Batfish
-bf_session.host = bf_address
-bf_init_snapshot(snapshot_path, overwrite=True)
+bf = Session(host=bf_address)
+bf.set_network(network_name)
+bf.init_snapshot(snapshot_path, name="s1", overwrite=True)
 
-# Пример запроса
-r = bfq.nodeProperties().answer().frame()
-print(r)
+# Пример запроса nodeProperties
+res = bf.q.nodeProperties().answer().frame()
+print(res)
 
 # Сохраняем результат
 os.makedirs(output_dir, exist_ok=True)
-r.to_csv(f"{output_dir}/results.csv")
+res.to_csv(f"{output_dir}/results.csv")
+
 
 
 # #!/usr/bin/env python
