@@ -54,6 +54,13 @@ jobs:
     - name: Run Pytest script
       run: python tests/test_batfish.py
 
+    - name: Backup generated configs
+      if: success()
+      run: |
+        cp snapshots/ci_net/s1/configs/generated/*.cfg backup/
+        cp snapshots/ci_net/s1/configs/manual/*.cfg backup/
+        echo "Configs backed up successfully."
+
     - name: Commit and push backups
       if: success()
       env:
