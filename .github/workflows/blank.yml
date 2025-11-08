@@ -32,7 +32,7 @@ jobs:
     - name: Install Python deps
       run: |
         python -m pip install --upgrade pip
-        python -m pip install pybatfish==2025.7.7.2423 ansible pytest
+        python -m pip install pybatfish==2025.7.7.2423 ansible pytest jinja2
 
     - name: Prepare Batfish snapshot
       run: |
@@ -41,6 +41,9 @@ jobs:
         #   sudo touch snapshots/ci_net/s1/router$i.cfg
         #   echo "! Router $i config" | sudo tee snapshots/ci_net/s1/configs/router$i.cfg >/dev/null
         # done
+
+    - name: Generate configs from yaml if have
+      run: python tools/conf-generator.py
 
     - name: Copy configs to snapshot (Ansible)
       run: ansible-playbook ansible/playbook.yml -i ansible/hosts
