@@ -18,5 +18,3 @@
   
   acls:
     - { name: "ACL1", number: 100, action: "permit", protocol: "ip", src: "any", dst: "any" }
-  
-# 1233
