@@ -1,28 +1,28 @@
----
-- name: Copy all configs to Batfish snapshot
-  hosts: localhost
-  gather_facts: false
-  tasks:
+# ---
+# - name: Copy all configs to Batfish snapshot
+#   hosts: localhost
+#   gather_facts: false
+#   tasks:
 
-    - name: Ensure snapshot folder exists
-      file:
-        path: ./snapshots/ci_net/s1
-        state: directory
-        mode: '0755'
+#     - name: Ensure snapshot folder exists
+#       file:
+#         path: ./snapshots/ci_net/s1
+#         state: directory
+#         mode: '0755'
 
-    - name: Copy manual configs if exist
-      copy:
-        src: snapshots/ci_net/s1/configs/manual/
-        dest: snapshots/ci_net/s1/
-        remote_src: yes
-      when: ansible.builtin.stat(path='snapshots/ci_net/s1/configs/manual').stat.exists
+#     - name: Copy manual configs if exist
+#       copy:
+#         src: snapshots/ci_net/s1/configs/manual/
+#         dest: snapshots/ci_net/s1/
+#         remote_src: yes
+#       when: ansible.builtin.stat(path='snapshots/ci_net/s1/configs/manual').stat.exists
 
-    - name: Copy generated configs if exist
-      copy:
-        src: snapshots/ci_net/s1/configs/generated/
-        dest: snapshots/ci_net/s1/
-        remote_src: yes
-      when: ansible.builtin.stat(path='snapshots/ci_net/s1/configs/generated').stat.exists
+#     - name: Copy generated configs if exist
+#       copy:
+#         src: snapshots/ci_net/s1/configs/generated/
+#         dest: snapshots/ci_net/s1/
+#         remote_src: yes
+#       when: ansible.builtin.stat(path='snapshots/ci_net/s1/configs/generated').stat.exists
 
 
 # - name: Copy manual configs
@@ -42,14 +42,14 @@
 
 
 
-# - name: Ensure Batfish snapshot folder exists
-#   hosts: localhost
-#   tasks:
-#     - name: Create snapshot folder
-#       file:
-#         path: ./snapshots/ci_net/s1
-#         state: directory
-#         mode: '0755'
+- name: Ensure Batfish snapshot folder exists
+  hosts: localhost
+  tasks:
+    - name: Create snapshot folder
+      file:
+        path: ./snapshots/ci_net/s1
+        state: directory
+        mode: '0755'
 
 
 # # ansible/playbook.yml
