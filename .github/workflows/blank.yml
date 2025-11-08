@@ -56,7 +56,7 @@ jobs:
     - name: Commit and push backups
       if: success()
       env:
-        GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+        GH_PAT: ${{ secrets.GH_PAT }}
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
