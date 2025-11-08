@@ -1,16 +1,18 @@
 - name: Copy manual configs
-  copy:
-    src: configs/manual/
-    dest: snapshots/ci_net/s1/configs/
-    mode: '0644'
-    remote_src: yes
+  hosts: localhost
+  tasks:
+    - name: Copy manual configs to snapshot
+      copy:
+        src: snapshots/ci_net/s1/configs/manual/
+        dest: snapshots/ci_net/s1/
+        remote_src: yes
 
-- name: Copy generated configs
-  copy:
-    src: configs/generated/
-    dest: snapshots/ci_net/s1/configs/
-    mode: '0644'
-    remote_src: yes
+    - name: Copy manual configs to snapshot
+      copy:
+        src: snapshots/ci_net/s1/configs/generated/
+        dest: snapshots/ci_net/s1/
+        remote_src: yes
+
 
 
 # - name: Ensure Batfish snapshot folder exists
