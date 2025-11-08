@@ -2,6 +2,13 @@
 from pybatfish.client.session import Session
 import os
 
+import pandas as pd
+
+pd.set_option('display.max_columns', None)   # показывать все колонки
+pd.set_option('display.max_rows', None)      # показывать все строки
+pd.set_option('display.width', 0)            # автоширина
+pd.set_option('display.max_colwidth', None)  # не обрезать содержимое
+
 # Настройки
 bf_address = "127.0.0.1"
 snapshot_path = "./snapshots/ci_net/s1"
@@ -155,6 +162,13 @@ else:
 # #!/usr/bin/env python3
 from pybatfish.client.session import Session
 import os
+
+import pandas as pd
+
+pd.set_option('display.max_columns', None)   # показывать все колонки
+pd.set_option('display.max_rows', None)      # показывать все строки
+pd.set_option('display.width', 0)            # автоширина
+pd.set_option('display.max_colwidth', None)  # не обрезать содержимое
 
 # Настройки
 bf_address = "127.0.0.1"
