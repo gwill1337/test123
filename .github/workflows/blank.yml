@@ -45,9 +45,6 @@ jobs:
     - name: Generate configs from yaml if have
       run: python tools/conf-generator.py
 
-    - name: Cleaning cfg files
-      run: python tools/clean.py
-
     - name: Copy configs to snapshot (Ansible)
       run: ansible-playbook ansible/playbook.yml -i ansible/hosts
 
@@ -73,19 +70,3 @@ jobs:
         git config --unset-all http.https://github.com/.extraheader || true
         git remote set-url origin https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}
         git push origin HEAD:main
-
-    # - name: Backup generated configs
-    #   if: success()
-    #   run: |
-    #     cp snapshots/ci_net/s1/configs/generated/*.cfg backup/
-    #     cp snapshots/ci_net/s1/configs/manual/*.cfg backup/
-    #     echo "Configs backed up successfully."
-
-    # - name: Commit and push backups
-    #   if: success()
-    #   run: |
-    #     git config user.name "github-actions[bot]"
-    #     git config user.email "github-actions[bot]@users.noreply.github.com"
-    #     git add backup/
-    #     git commit -m "Backup configs after successful validation" || echo "Nothing to commit"
-    #     git push
