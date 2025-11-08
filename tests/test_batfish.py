@@ -4,10 +4,10 @@ import os
 
 import pandas as pd
 
-pd.set_option('display.max_columns', None)   # показывать все колонки
-pd.set_option('display.max_rows', None)      # показывать все строки
-pd.set_option('display.width', 0)            # автоширина
-pd.set_option('display.max_colwidth', None)  # не обрезать содержимое
+# pd.set_option('display.max_columns', None)
+# pd.set_option('display.max_rows', None)
+# pd.set_option('display.width', 0)
+# pd.set_option('display.max_colwidth', None)
 
 # Настройки
 bf_address = "127.0.0.1"
